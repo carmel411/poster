@@ -1,1 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('../src/vendor/bootstrap/css/bootstrap.min.css');
+@import url('../src/vendor/font-awesome/css/font-awesome.min.css');
+@import url('../src/vendor/@fancyapps/fancybox/jquery.fancybox.min.css');
+
+
+ 
+@import url('../src/css/fontastic.css');
+@import url('../src/css/style.default.css');
+@import url('../src/css/custom.css');
