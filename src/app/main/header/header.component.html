@@ -19,24 +19,31 @@
       <div class="container">
         <!-- Navbar Brand -->
         <div class="navbar-header d-flex align-items-center justify-content-between">
-          <!-- Navbar Brand --><a href="index.html" class="navbar-brand">Bootstrap Blog</a>
+          <!-- Navbar Brand --><a  routerLink="/home" class="navbar-brand">Poster</a>
           <!-- Toggle Button-->
           <button type="button" data-toggle="collapse" data-target="#navbarcollapse" aria-controls="navbarcollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span></span><span></span><span></span></button>
         </div>
         <!-- Navbar Menu -->
         <div id="navbarcollapse" class="collapse navbar-collapse">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item"><a href="index.html" class="nav-link ">Home</a>
+            <li class="nav-item"><a routerLink="/home" routerLinkActive="active-link" class="nav-link ">בית</a>
             </li>
-            <li class="nav-item"><a href="blog.html" class="nav-link active ">Blog</a>
+            <li class="nav-item"><a  routerLink="/blog" routerLinkActive="active-link"  class="nav-link">כל הסיפורים</a>
             </li>
-            <li class="nav-item"><a href="post.html" class="nav-link ">Post</a>
+            <li class="nav-item"><a routerLink="/about" routerLinkActive="active-link" class="nav-link ">אודות</a>
             </li>
-            <li class="nav-item"><a href="#" class="nav-link ">Contact</a>
+            <li class="nav-item"><a routerLink="/user/bob" routerLinkActive="active-link" class="nav-link ">My posts</a>
             </li>
-          </ul>
+            <li class="nav-item"><a  routerLink="/myprofile" routerLinkActive="active-link"  class="nav-link">הפרופיל שלי</a>
+            </li> 
+            <li class="nav-item"><a  routerLink="/user/bob" routerLinkActive="active-link"  class="nav-link">ניהול</a>
+            </li> 
+            <li *ngIf="!userloggedin" class="nav-item"><a  routerLink="/login" routerLinkActive="active-link"  class="nav-link">התחברות לרשומים</a>
+            </li>
+            <li *ngIf="userloggedin" class="nav-item"><a  routerLink="" (click)="logoutClick()" routerLinkActive="active-link"  class="nav-link">התנתקות</a>
+            </li>
+           </ul>
           <div class="navbar-text"><a href="#" class="search-btn"><i class="icon-search-1"></i></a></div>
-          <ul class="langs navbar-text"><a href="#" class="active">EN</a><span>           </span><a href="#">ES</a></ul>
         </div>
       </div>
     </nav>
