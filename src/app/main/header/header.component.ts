@@ -21,9 +21,11 @@ this.auth.rememberMeLogin();
 // TODO למחוק דוגמא לאיפוס סיסמא
 // this.auth.forgetPassword("26carmel@gmail.com");
 
+if(sessionStorage.getItem("access-token")){
+  this.auth.ifUserLogin.next(true);
+  this.auth.getUserData();
+}else{this.auth.ifUserLogin.next(false)}
 
-
-this.auth.ifUserLogin.next(sessionStorage.getItem("access-token")?true:false);
 this.auth.ifUserLogin.subscribe((val)=>{
   this.userloggedin = (val)
   })

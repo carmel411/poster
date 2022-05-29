@@ -1,0 +1,91 @@
+
+<div class="container">
+    <h5 class="mb-0">הפרופיל שלי</h5>
+
+
+    <div>
+        <form #updateUserForm=ngForm (ngSubmit)="updateUserPushed(updateUserForm)">
+          
+          <!-- Name input -->
+          <div class="form-outline mb-4">
+            <input type="text" class="form-control form-control-user"
+            id="updateUserName" name="updateUserName" aria-describedby="name"
+            ngModel required #updateUserName="ngModel">
+                                                 
+            <div *ngIf="!updateUserName.dirty" class="danger">
+                <p>הקש שם מלא</p>
+                </div>
+          </div>
+    
+          <!-- Phone input -->
+          <div class="form-outline mb-4">
+            <input type="text" class="form-control form-control-user"
+            id="updateUserPhone" name="updateUserPhone" aria-describedby="phone"
+            ngModel required #updateUserPhone="ngModel">
+                                                 
+            <div *ngIf="!updateUserPhone.dirty" class="danger">
+                <p>הקש מספר טלפון</p>
+                </div>
+          </div>
+
+          
+          <!-- Email input -->
+          <div class="form-outline mb-4">
+            <input type="email" class="form-control form-control-user"
+            id="updateUserEmail" name="updateUserEmail" aria-describedby="emailHelp"
+            placeholder="לדוגמה abc@def.ghi" ngModel required email #updateUserEmail="ngModel">
+                                                 
+            <div *ngIf="updateUserEmail.invalid || !updateUserEmail.dirty" class="danger">
+                <p>נא הקש כתובת דוא"ל תקינה</p>
+                </div>
+
+            </div>
+    
+          <!-- Password input -->
+          <div class="form-outline mb-4">
+              <p>לשינוי סיסמתך הקש כאן סיסמה חדשה</p>
+            <input type="password" class="form-control form-control-user"
+            id="updateUserPassword" name="updateUserPassword" placeholder="Password" ngModel password minlength="6" #updateUserPassword="ngModel">
+            <div *ngIf="(updateUserPassword.invalid)" class="danger">
+                <p>נא הקש את סיסמה עם 6 תווים ומעלה</p>
+              </div>
+
+            </div>
+    
+          <!-- Repeat Password input -->
+          <div class="form-outline mb-4">
+            <input type="password" class="form-control form-control-user"
+            name="updateUserPassword2" id="updateUserPassword2" placeholder="Repeat Password" ngModel minlength="6" password #updateUserPassword2="ngModel">
+    </div>
+    <div *ngIf="updateUserPassword2.value != updateUserPassword.value" class="danger">
+        <p>נא הקש את אותה הסיסמא</p>
+      </div>              
+    
+      <input type="text" class="form-control form-control-user"
+      name="updateUserAvatar" id="updateUserAvatar" ngModel minlength="6" #updateUserAvatar="ngModel">
+
+    
+          <!-- Submit button -->
+          <button type="submit" class="btn btn-primary btn-block mb-3" [disabled]="!updateUserForm.valid || (updateUserPassword2.value != updateUserPassword.value)">updateUser</button>
+          <button type="button" class="mx-2 my-2 btn btn-primary" routerLink="/home" routerLinkActive="active">ביטול</button>
+
+        </form>
+      </div>
+    
+
+
+
+
+
+              <div class="form-outline mb-4">
+                <!-- <input type="file" (change)="onFileChanged($event)"> -->
+              </div>
+    
+    
+
+              
+			  
+			  
+			  
+			  
+			  

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { async, Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
@@ -15,39 +15,52 @@ import {Location} from '@angular/common';
   templateUrl: './my-profile.component.html',
   styleUrls: ['./my-profile.component.css']
 })
-export class MyProfileComponent implements OnInit {
+export class MyProfileComponent implements OnInit{
 
-currentUserData: {}={
-      name: "", 
-      phone: "", 
-      email: "", 
-      avatar: ""
-}
+// currentUserData: {}={
+//       name: "", 
+//       phone: "", 
+//       email: "", 
+//       avatar: ""
+// }
 
   constructor(private spinner: SpinnerService, private auth: AuthService,  private route: ActivatedRoute, private swal: SwalService,private _location: Location) { }
 
-  @ViewChild('userForm') updateUserForm?: NgForm;
-  
+  @ViewChild('updateUserForm') updateUserForm?: NgForm;
+  name = ""
+  phone = ""
+  email = ""
+  avatar = ""
+
   ngOnInit(): void {
-this.fillForm()
-  }
- 
+  this.fillForm()
+
+}
+
   fillForm(){
+  
     this.auth.currentUser.subscribe((val)=>{
-      this.currentUserData = (val)
-      console.log(this.currentUserData)
-      })
-      const objCurrentUserData = JSON.parse(JSON.stringify(this.currentUserData))
+      const currentUserData = (val)
+      console.log(currentUserData)
+      const objCurrentUserData = JSON.parse(JSON.stringify(currentUserData))
+      setTimeout(() => {
+        this.updateUserForm?.form.patchValue({
+          updateUserName: objCurrentUserData.name, 
+          updateUserPhone: objCurrentUserData.phone, 
+          updateUserEmail: objCurrentUserData.email, 
+          updateUserAvatar: objCurrentUserData.avatar 
+          
+        });  
+    }, );
     
-     this.updateUserForm?.setValue({
-           name: objCurrentUserData.name, 
-           phone: objCurrentUserData.phone, 
-           email: objCurrentUserData.email, 
-           avatar: objCurrentUserData.avatar 
-         });
-         console.log(objCurrentUserData.name)
+          
+    }) 
     }
      
+    updateUserPushed(updateUserForm: NgForm){
+      
+      
+    }
 
   // updateUser(){
   //   var thisId = "121434353453534534534"

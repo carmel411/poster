@@ -141,10 +141,8 @@ getUserData(): void{
   this.http.get<object>(`${this.API_URL}users/me`, {headers} ).subscribe({
     next: data => {
         this.spinner.setStatus(false);
-        const objData = JSON.parse(JSON.stringify(data))
-        this.currentUser.next(objData);
+        this.currentUser.next(data);
         console.log(data)
-        console.log(objData)
     },
     error: error => {
       this.spinner.setStatus(false);
