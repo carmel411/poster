@@ -152,6 +152,36 @@ getUserData(): void{
 }
 
  
+updateUserData(name:string, email:string, phone:string, password:string, password2:string, avatar:string){
+  this.spinner.setStatus(true);
+  let token: string = sessionStorage.getItem('access-token')!
+  const headers = new HttpHeaders().set('x-auth-token',token)
+  const userInfo = {'name': name, 'email': email, 'phone':phone, 'password': password, 'password2': password2, 'avatar': avatar};
+  // const body=JSON.stringify(userInfo);
+  console.log(userInfo);
+  // console.log(body);
+   
+  this.http.patch<any>(`${this.API_URL}users/update`,userInfo,{headers}).subscribe({
+      next: data => {
+          this.spinner.setStatus(false);
+          this.userId = data._id;
+          this.swal.alertWithSuccess("CONGRATULATIONS! you are registered!")
+          console.log(this.userId)
+          this.login(email,password,false);
+
+      },
+      error: error => {
+        this.spinner.setStatus(false);
+        if (typeof error.error == 'string'){
+          this.swal.alertWithWarning("Register Error",error.error)
+        }else{
+          this.swal.alertWithWarning("Register Error",error.message)
+        } 
+        console.error('There was an error!', error.error );
+      }
+  })
+}
+
 
 // ifUserLogin():boolean{
 //   if (sessionStorage.getItem('access-token')){
