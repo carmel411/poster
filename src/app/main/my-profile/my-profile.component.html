@@ -1,72 +1,98 @@
 
-<div class="container">
-    <h5 class="mb-0">הפרופיל שלי</h5>
+<div class="container col-xs-12 col-sm-6 col-md-3">
+    <h5 class="mt-3 mb-3 text-center">הפרופיל שלי</h5>
 
 
     <div>
         <form #updateUserForm=ngForm (ngSubmit)="updateUserPushed(updateUserForm)">
           
           <!-- Name input -->
-          <div class="form-outline mb-4">
+          <div class="form-outline mb-2">
+    <p class="text-center font-weight-bold mt-0">שם</p>
+
             <input type="text" class="form-control form-control-user"
             id="updateUserName" name="updateUserName" aria-describedby="name"
             ngModel required #updateUserName="ngModel">
                                                  
-            <div *ngIf="!updateUserName.dirty" class="danger">
+            <div *ngIf="updateUserName.invalid" class="danger">
                 <p>הקש שם מלא</p>
                 </div>
           </div>
     
           <!-- Phone input -->
-          <div class="form-outline mb-4">
+          <div class="form-outline mb-2">
+    <p class="text-center font-weight-bold mt-0">טלפון</p>
+
             <input type="text" class="form-control form-control-user"
             id="updateUserPhone" name="updateUserPhone" aria-describedby="phone"
             ngModel required #updateUserPhone="ngModel">
                                                  
-            <div *ngIf="!updateUserPhone.dirty" class="danger">
+            <div *ngIf="updateUserPhone.invalid" class="danger">
                 <p>הקש מספר טלפון</p>
                 </div>
           </div>
 
           
           <!-- Email input -->
-          <div class="form-outline mb-4">
+          <div class="form-outline mb-2">
+    <p class="text-center font-weight-bold mt-0">דוא"ל</p>
+
             <input type="email" class="form-control form-control-user"
             id="updateUserEmail" name="updateUserEmail" aria-describedby="emailHelp"
             placeholder="לדוגמה abc@def.ghi" ngModel required email #updateUserEmail="ngModel">
                                                  
-            <div *ngIf="updateUserEmail.invalid || !updateUserEmail.dirty" class="danger">
+            <div *ngIf="updateUserEmail.invalid" class="danger">
                 <p>נא הקש כתובת דוא"ל תקינה</p>
                 </div>
 
             </div>
     
           <!-- Password input -->
-          <div class="form-outline mb-4">
+          <div class="form-outline mb-2">
               <p>לשינוי סיסמתך הקש כאן סיסמה חדשה</p>
             <input type="password" class="form-control form-control-user"
-            id="updateUserPassword" name="updateUserPassword" placeholder="Password" ngModel password minlength="6" #updateUserPassword="ngModel">
-            <div *ngIf="(updateUserPassword.invalid)" class="danger">
-                <p>נא הקש את סיסמה עם 6 תווים ומעלה</p>
+            id="updateUserPassword" name="updateUserPassword" placeholder="סיסמה חדשה" ngModel password minlength="6" #updateUserPassword="ngModel">
+            <div *ngIf="updateUserPassword.invalid" class="danger">
+                <p>נא הקש סיסמה עם 6 תווים ומעלה</p>
               </div>
 
             </div>
     
           <!-- Repeat Password input -->
-          <div class="form-outline mb-4">
-            <input type="password" class="form-control form-control-user"
-            name="updateUserPassword2" id="updateUserPassword2" placeholder="Repeat Password" ngModel minlength="6" password #updateUserPassword2="ngModel">
+          <div class="form-outline mb-2">
+            <input type="password" class="form-control form-control-user" autocomplete="one-time-code"
+            name="updateUserPassword2" id="updateUserPassword2" placeholder="חזור על הסיסמה" ngModel minlength="6" password #updateUserPassword2="ngModel">
     </div>
     <div *ngIf="updateUserPassword2.value != updateUserPassword.value" class="danger">
-        <p>נא הקש את אותה הסיסמא</p>
+        <p>נא הקש סיסמה זהה בשני השדות או השאר את שניהם ריקים</p>
       </div>              
-    
-      <input type="text" class="form-control form-control-user"
-      name="updateUserAvatar" id="updateUserAvatar" ngModel minlength="6" #updateUserAvatar="ngModel">
+      <div class="form-outline mb-2">
+        <input type="text" hidden class="form-control form-control-user"
+        name="updateUserAvatar" id="updateUserAvatar" ngModel minlength="6" #updateUserAvatar="ngModel">
+  
+    </div>
 
+    <div class="form-outline mb-2 row">
+
+        <div class="col-9">
+                    
+    <p class="text-center font-weight-bold mt-0">תמונת פרופיל</p>
+
+        </div>
+        <div class="col-3">
+ <img class="avatar"  *ngIf="imgResult"  [src]="transformStringToImage()">
+        </div>
+    <div class="form-outline mb-2">
+        
+        <button type="button" (click)="uploadAvatar()" #fileUpload>העלה תמונה חדשה</button>
+    </div>
+
+      
+     
+</div>
     
-          <!-- Submit button -->
-          <button type="submit" class="btn btn-primary btn-block mb-3" [disabled]="!updateUserForm.valid || (updateUserPassword2.value != updateUserPassword.value)">updateUser</button>
+          <!-- Submit button --> 
+          <button type="submit"  class="btn btn-primary btn-block mb-3" [disabled]="!updateUserForm.valid">עדכן את הפרופיל</button>
           <button type="button" class="mx-2 my-2 btn btn-primary" routerLink="/home" routerLinkActive="active">ביטול</button>
 
         </form>
@@ -77,7 +103,7 @@
 
 
 
-              <div class="form-outline mb-4">
+              <div class="form-outline mb-2">
                 <!-- <input type="file" (change)="onFileChanged($event)"> -->
               </div>
     

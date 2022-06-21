@@ -15,6 +15,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { MyProfileComponent } from './main/my-profile/my-profile.component';
+import {NgxImageCompressService} from "ngx-image-compress";
+import { UsersComponent } from './admin/users/users.component';
+import { EditpostComponent } from './main/editpost/editpost.component';
+import { PostlistComponent } from './postlist/postlist.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +32,9 @@ import { MyProfileComponent } from './main/my-profile/my-profile.component';
     AboutComponent,
     LoginComponent,
     MyProfileComponent,
+    UsersComponent,
+    EditpostComponent,
+    PostlistComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +44,7 @@ import { MyProfileComponent } from './main/my-profile/my-profile.component';
     FormsModule
 
   ],
-  providers: [CookieService,
+  providers: [CookieService, NgxImageCompressService,
     { provide: Window, useValue: window }],
   bootstrap: [AppComponent]
 })

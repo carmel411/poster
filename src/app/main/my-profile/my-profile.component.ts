@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { async, Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
@@ -7,15 +7,15 @@ import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { SwalService } from '../../services/swal.service';
 import {Location} from '@angular/common';
-
-
+import {NgxImageCompressService} from "ngx-image-compress";
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-my-profile',
   templateUrl: './my-profile.component.html',
   styleUrls: ['./my-profile.component.css']
 })
-export class MyProfileComponent implements OnInit{
+export class MyProfileComponent implements OnInit, OnDestroy{
 
 // currentUserData: {}={
 //       name: "", 
@@ -24,18 +24,23 @@ export class MyProfileComponent implements OnInit{
 //       avatar: ""
 // }
 
-  constructor(private spinner: SpinnerService, private auth: AuthService,  private route: ActivatedRoute, private swal: SwalService,private _location: Location) { }
+  constructor(private router: Router ,private sanitizer:DomSanitizer,private spinner: SpinnerService, private imageCompress: NgxImageCompressService,private auth: AuthService,  private route: ActivatedRoute, private swal: SwalService,private _location: Location) { }
 
   @ViewChild('updateUserForm') updateUserForm?: NgForm;
   name = ""
   phone = ""
   email = ""
   avatar = ""
-
+imgResult: any
   ngOnInit(): void {
   this.fillForm()
 
 }
+
+ngOnDestroy(): void {
+  this.auth.currentUser.unsubscribe
+}
+
 
   fillForm(){
   
@@ -48,50 +53,52 @@ export class MyProfileComponent implements OnInit{
           updateUserName: objCurrentUserData.name, 
           updateUserPhone: objCurrentUserData.phone, 
           updateUserEmail: objCurrentUserData.email, 
+          updateUserPassword: "",
+          updateUserPassword2: "", 
           updateUserAvatar: objCurrentUserData.avatar 
           
         });  
+        this.imgResult = objCurrentUserData.avatar
     }, );
     
           
     }) 
     }
      
-    updateUserPushed(updateUserForm: NgForm){
-      
-      
+    uploadAvatar(){
+      const MAX_MEGABYTE = 0.2;
+      this.imageCompress
+        .uploadAndGetImageWithMaxSize(MAX_MEGABYTE) // this function can provide debug information using (MAX_MEGABYTE,true) parameters
+        .then(
+          (result: string) => {
+            this.imgResult = result;
+            this.updateUserForm?.form.patchValue({
+              updateUserAvatar: this.imgResult}) 
+          },
+          (result: string) => {
+            console.error('The compression algorithm didn\'t succed! The best size we can do is', this.imageCompress.byteCount(result), 'bytes')
+            this.imgResult = result;
+          });
     }
 
-  // updateUser(){
-  //   var thisId = "121434353453534534534"
-  //   var user = {
-  //     firstName: 'Moshe',
-  //     lastName: 'Levi',
-  //     address: 'TA'
-  //   }
-  //   this.spinner.setStatus(true);
-  //   this.db.collection("users").doc(thisId).update(user).then((res)=>{
-  //     console.log(res)
-  //     this.getAllUsers()
-  //     // this.alertService.done("Done");
-  //     this.spinner.setStatus(false);
-  //   }).catch((err)=>{
-  //     this.spinner.setStatus(false);
-  //     // this.alertService.error('Error',err.message);
-  //     console.log(err)
-  //   })
-  // }
+    transformStringToImage(){
+      return this.sanitizer.bypassSecurityTrustResourceUrl(this.imgResult);
+  }
 
 
-// onSubmit(userForm: NgForm){
-//   console.log(userForm.form.value)
-//   var customerObj = userForm.form.value
-//   customerObj.id = this.customerId;
-//   customerObj.status = true;
-//   this.helper.saveCustomer(customerObj)
-//   this.swal.alertWithSuccess("User save successfully")
-//   // TODO: שבשמירה לא ישתנה הסטטוסלחיובי
-// }
+    updateUserPushed(updateUserForm: NgForm){
+            this.auth.updateUserData(
+              updateUserForm.value.updateUserName,
+              updateUserForm.value.updateUserEmail, 
+              updateUserForm.value.updateUserPhone,
+              updateUserForm.value.updateUserPassword,
+              updateUserForm.value.updateUserPassword2,
+              updateUserForm.value.updateUserAvatar)
+              this.router.navigate(['/home']);
+
+
+    }
+
 
 backClicked() {
   this._location.back();
