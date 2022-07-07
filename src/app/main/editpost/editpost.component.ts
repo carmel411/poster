@@ -47,14 +47,16 @@ export class EditpostComponent implements OnInit {
                  postBody: postData.postBody, 
                  author: postData.author, 
                  tags: postData.tags.join(', '), 
-                 postImage: postData.postImage, 
+                 imageUrl: postData.imageUrl, 
+                 comments: JSON.stringify(postData.comments)
             
           });  
       
           })
     })
     .catch((error) => {
-      console.log("Promise rejected with " + JSON.stringify(error));
+      let errorString = JSON.stringify(error)
+      this.swal.alertWithWarning("תקלה בטעינת הנתונים", errorString );
     });
 
   
@@ -65,13 +67,15 @@ export class EditpostComponent implements OnInit {
 
 
 onSubmit(editPostForm: NgForm){
-  console.log("submit push")
 
   let info = editPostForm.form.value
   let tagsArray = info.tags.split(',').map((tag: string) => tag.trim()) //remove whitespaces
   tagsArray = tagsArray.filter((item: any) => item); //remove empty values from array
-  if(this.id==''){this.postService.createPost(info.name,info.postBody,info.author,info.summary,tagsArray,info.imageUrl)}else{
-    this.postService.updatePost(this.id,info.name,info.postBody,info.author,info.summary,tagsArray,info.imageUrl)}
+  if(this.id){
+  let commentsJson = JSON.parse(info.comments)
+    this.postService.updatePost(this.id,info.name,info.postBody,info.author,info.summary,tagsArray,info.imageUrl,commentsJson)}
+    else{
+    this.postService.createPost(info.name,info.postBody,info.author,info.summary,tagsArray,info.imageUrl)}
 }
 
 

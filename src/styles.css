@@ -1,9 +1,23 @@
-@import url('../src/vendor/bootstrap/css/bootstrap.min.css');
-@import url('../src/vendor/font-awesome/css/font-awesome.min.css');
-@import url('../src/vendor/@fancyapps/fancybox/jquery.fancybox.min.css');
+@import url('../src/css/style.blue.css');
+html {
+    background-image: url(../src/assets/images/seamless-pattern-g5ac3ff013_640.png);
+    background-size: 200px;
+     background-repeat: repeat;
+  }
+  
+  body {
+    background:rgba(255,255,255,0.5); /* applies a 50% transparent white background */
+  }
 
-
- 
-@import url('../src/css/fontastic.css');
-@import url('../src/css/style.default.css');
-@import url('../src/css/custom.css');
+main{
+    background-color: rgba(204, 220, 204, 0.874);
+}
+form{
+    background-color: white;
+}
+table{
+    background-color: white;
+}
+.white-back{
+    background-color: white;
+}

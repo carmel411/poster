@@ -22,15 +22,13 @@ export class MailService {
     
 
     const body=JSON.stringify(mailData);
-    console.log(mailData);
-    console.log(body);
      
     this.http.post<any>(`${this.API_URL}mails`,body,{'headers':headers}).subscribe({
         next: data => {
             this.spinner.setStatus(false);
             
             this.swal.alertWithSuccess("message sent")
-            console.log(data);
+    
         },
         error: error => {
           this.spinner.setStatus(false);

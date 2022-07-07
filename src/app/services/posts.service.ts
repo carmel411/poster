@@ -35,13 +35,12 @@ export class PostsService {
   constructor(private http: HttpClient, private swal: SwalService, private spinner: SpinnerService, private router: Router) {}
 
 
-  async getPostByPostId(postId: string): Promise < any > {
-    this.spinner.setStatus(true);
-    let token: string = sessionStorage.getItem('access-token') !
-      const headers = new HttpHeaders().set('x-auth-token', token)
-    return this.http.get < object > (`${this.API_URL}posts/${postId}`, {
-        headers
-      }).toPromise();
+  getPostByPostId(postId: string): Promise < any > {
+    let headers
+    if(sessionStorage.getItem('access-token')){
+    let token: string = sessionStorage.getItem('access-token')!
+      headers = new HttpHeaders().set('x-auth-token', token)}
+    return this.http.get < object > (`${this.API_URL}posts/${postId}`, { headers }).toPromise();
   }
 
   getPostsBytag(tag: string) {
@@ -54,6 +53,24 @@ export class PostsService {
       .toPromise();
   }
 
+  getPostsByFavorites() {
+    let token: string = sessionStorage.getItem('access-token')!
+    const headers = new HttpHeaders().set('x-auth-token',token)
+    return this.http.get(`${this.API_URL}posts/favorites`, {headers} )
+      .toPromise();
+  }
+
+
+  getAllPosts() {
+    return this.http.get < object > (`${this.API_URL}posts/allposts`)
+      .toPromise();
+  }
+
+
+  getLatestPosts() {
+    return this.http.get < object > (`${this.API_URL}posts/latest`)
+      .toPromise();
+  }
 
   createPost(name: string, postBody: string, author: string, summary: string, tags: Array < string > , imageUrl: string) {
     this.spinner.setStatus(true);
@@ -74,7 +91,6 @@ export class PostsService {
       postInfo = {...postInfo,...image}}
 
     const body = JSON.stringify(postInfo);
-    console.log(postInfo);
     this.http.post < any > (`${this.API_URL}posts`, postInfo, {
       headers
     }).subscribe({
@@ -96,7 +112,7 @@ export class PostsService {
     })
   }
 
-  updatePost(id: string, name: string, postBody: string, author: string, summary: string, tags: Array < string > , imageUrl: string) {
+  updatePost(id: string, name: string, postBody: string, author: string, summary: string, tags: Array < string > , imageUrl: string,comments:Array<object>) {
     
 
     this.spinner.setStatus(true);
@@ -108,13 +124,13 @@ export class PostsService {
       'author': author,
       'summary': summary,
       'tags': tags,
+      'comments':comments
     };
     if(imageUrl!=='' && imageUrl!==null){
       var image = {'imageUrl':imageUrl}
       postInfo = {...postInfo,...image}}
 
     const body = JSON.stringify(postInfo);
-    console.log(postInfo);
     
     this.http.put < any > (`${this.API_URL}posts/${id}`, postInfo, {
       headers
@@ -132,47 +148,39 @@ export class PostsService {
         } else {
           this.swal.alertWithWarning("העידכון נכשל", error.message)
         }
-        console.error('There was an error!', error.error);
       }
     })
   }
 
 
+  deletePost(id: string): Promise<any> {
+      let token: string = sessionStorage.getItem('access-token')!
+      const headers = new HttpHeaders().set('x-auth-token', token)
+      return this.http.delete(`${this.API_URL}posts/${id}`, { headers })
+      .toPromise();
+      }
+    
 
-
-
-  // getMyPosts(){
-  //   this.spinner.setStatus(true);
-  //   const headers = {'content-type': 'application/json', 'x-auth-token':}
-  //   const token = 
-  //   console.log(userInfo);
-  //   console.log(body);
-  //   this.http.get 
-  //   this.http.post<any>(`${this.baseUrl}auth`,body,{'headers':headers}).subscribe({
-  //       next: data => {
-  //           this.spinner.setStatus(false);
-  //           this.userToken = data.token;
-  //           this.swal.alertWithSuccess("Login Success")
-  //           console.log(this.userToken);
-  //           this.router.navigate(['/home']);
-  //       },
-  //       error: error => {
-  //         this.spinner.setStatus(false);
-  //         if (typeof error.error == 'string'){
-  //           this.swal.alertWithWarning("Login Error",error.error)
-  //         }else{
-  //           this.swal.alertWithWarning("Login Error",error.message)
-  //         } 
-  //         console.error('There was an error!', error.error );
-  //       }
-  //   })
-  // }
-
-
-
-
-
-
+      pushComment(id:string,newComment: any) {
+        this.spinner.setStatus(true);
+        const body = newComment;
+        
+        this.http.put < any > (`${this.API_URL}posts/comment/${id}`, body).subscribe({
+          next: data => {
+            this.spinner.setStatus(false);
+            this.swal.alertWithSuccess("תגובתך נרשמה ותופיע בהקדם")
+          },
+          error: error => {
+            this.spinner.setStatus(false);
+            if (typeof error.error == 'string') {
+              this.swal.alertWithWarning("תקלה ברישום התגובה", error.error)
+            } else {
+              this.swal.alertWithWarning("תקלה ברישום התגובה", error.message)
+            }
+          }
+        })
+      }
+    
 
 
 }

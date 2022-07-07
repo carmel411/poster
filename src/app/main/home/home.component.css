@@ -11,6 +11,12 @@
     color: #fff;
 }
 
+.l-bg-yellow {
+  background: linear-gradient(to right, #493240, rgb(213, 224, 11)) !important;
+  color: #fff;
+}
+
+
 .l-bg-blue-dark {
     background: linear-gradient(to right, #373b44, #4286f4) !important;
     color: #fff;
@@ -25,6 +31,12 @@
     background: linear-gradient(to right, #a86008, #ffba56) !important;
     color: #fff;
 }
+
+.l-bg-cyan-dark {
+  background: linear-gradient(to right, #043052, #84c0ec) !important;
+  color: #fff;
+}
+
 
 .card .card-statistic-3 .card-icon-large .fas, .card .card-statistic-3 .card-icon-large .far, .card .card-statistic-3 .card-icon-large .fab, .card .card-statistic-3 .card-icon-large .fal {
     font-size: 110px;
@@ -59,4 +71,54 @@
 .l-bg-cyan {
     background: linear-gradient(135deg, #289cf5, #84c0ec) !important;
     color: #fff;
+}
+
+.card {
+    flex-direction: row;
+    align-items: center;
+  }
+  .card-title {
+    font-weight: bold;
+  }
+  .card img {
+    width: 30%;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: calc(0.25rem - 1px);
+  }
+  @media only screen and (max-width: 768px) {
+    a {
+      display: none;
+    }
+    .card-body {
+      padding: 0.5em 1.2em;
+    }
+    .card-body .card-text {
+      margin: 0;
+    }
+    .card img {
+      width: 50%;
+    }
+  }
+  @media only screen and (max-width: 1200px) {
+    .card img {
+      width: 40%;
+    }
+  }
+
+.form-control:focus {
+  box-shadow: none;
+}
+
+.form-control-underlined {
+  border-width: 0;
+  border-bottom-width: 1px;
+  border-radius: 0;
+  padding-left: 0;
+}
+
+
+.form-control::placeholder {
+  font-size: 0.95rem;
+  color: #aaa;
+  font-style: italic;
 }

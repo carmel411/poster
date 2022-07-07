@@ -1,5 +1,6 @@
-<div class="container col-xs-12 col-sm-6 col-md-3">
+<div class="container col-xs-12 col-sm-6 col-md-3 white-back">
 <!-- Pills navs -->
+
 <ul ngbNav #nav="ngbNav" class="nav-tabs nav-justified mb-3 mt-3">
     <li ngbNavItem>
       <a ngbNavLink>כניסה</a>
@@ -29,9 +30,9 @@
         
               <!-- Email input -->
               <div class="form-outline mb-4">
-                <input type="email" class="form-control form-control-user"
-                id="loginEmail" name="loginEmail" aria-describedby="emailHelp"
-                placeholder="Enter Email Address..." ngModel required email #loginEmail="ngModel">
+                <input type="text" class="form-control form-control-user"
+                id="loginEmail" name="loginEmail" aria-describedby="emailHelp"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" 
+                placeholder="לדוגמה abc@def.ghi" ngModel required email #loginEmail="ngModel">
                                                      
                 <div *ngIf="loginEmail.invalid && (loginEmail.dirty || loginEmail.touched)" class="danger">
                     <p>נא הקש כתובת דוא"ל תקינה</p>
@@ -42,7 +43,7 @@
               <!-- Password input -->
               <div class="form-outline mb-4">
                 <input type="password" class="form-control form-control-user"
-                id="loginPassword" name="loginPassword" placeholder="Password" ngModel required password minlength="6" #loginPassword="ngModel">
+                id="loginPassword" name="loginPassword" placeholder="סיסמה" ngModel required password minlength="6" #loginPassword="ngModel">
                 <div *ngIf="(loginPassword.touched && !loginPassword.dirty)" class="danger">
                     <p>הקש את הסיסמה</p>
                   </div>
@@ -69,7 +70,7 @@
             </div>
         
               <!-- Submit button -->
-              <button type="submit" class="btn btn-primary btn-block mb-4" [disabled]="loginForm.invalid">היכנס</button>
+              <button type="submit" class="btn btn-primary btn-block mb-4" [disabled]="loginForm.invalid">כניסה</button>
             </form>
             <hr>
 
@@ -91,7 +92,7 @@
               <div class="form-outline mb-4">
                 <input type="text" class="form-control form-control-user"
                 id="registerName" name="registerName" aria-describedby="name"
-                placeholder="לדוגמה: ישראל ישראלי" ngModel required #registerName="ngModel">
+                placeholder="לדוגמה: ישראל ישראלי" ngModel minlength=4 required #registerName="ngModel">
                                                      
                 <div *ngIf="registerName.touched && !registerName.dirty" class="danger">
                     <p>הקש שם מלא</p>
@@ -102,7 +103,7 @@
               <!-- Email input -->
               <div class="form-outline mb-4">
                 <input type="email" class="form-control form-control-user"
-                id="registerEmail" name="registerEmail" aria-describedby="emailHelp"
+                id="registerEmail" name="registerEmail" aria-describedby="emailHelp"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" 
                 placeholder="לדוגמה abc@def.ghi" ngModel required email #registerEmail="ngModel">
                                                      
                 <div *ngIf="registerEmail.invalid && (registerEmail.dirty || registerEmail.touched)" class="danger">
@@ -113,10 +114,11 @@
         
               <!-- Password input -->
               <div class="form-outline mb-4">
-                <input type="password" class="form-control form-control-user"
-                id="registerPassword" name="registerPassword" placeholder="Password" ngModel required password minlength="6" #registerPassword="ngModel">
-                <div *ngIf="(registerPassword.touched && !registerPassword.dirty)" class="danger">
-                    <p>נא הקש את סיסמתך</p>
+                <p class="text-justify">בחר סיסמה בת 8 תווים לפחות, הכוללת לפחות 4 מספרים, אות גדולה, אות קטנה ותו מיוחד</p>
+                <input type="text" class="form-control form-control-user" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=(.*?[0-9]){4})(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                id="registerPassword" name="registerPassword" placeholder="סיסמה לדוגמה: Est%1234" ngModel required password minlength="6" #registerPassword="ngModel">
+                <div *ngIf="((registerPassword.touched || registerPassword.dirty) && registerPassword.invalid)" class="danger">
+                    <p>נא הקש סיסמה העומדת בתנאים</p>
                   </div>
 
                 </div>
@@ -124,7 +126,7 @@
               <!-- Repeat Password input -->
               <div class="form-outline mb-4">
                 <input type="password" class="form-control form-control-user"
-                name="registerPassword2" id="registerPassword2" placeholder="Repeat Password" ngModel required minlength="6" password #registerPassword2="ngModel">
+                name="registerPassword2" id="registerPassword2" placeholder="חזור על הסיסמה" ngModel required minlength="6" password #registerPassword2="ngModel">
         </div>
         <div *ngIf="registerPassword2.touched && (registerPassword2.value != registerPassword.value)" class="danger">
             <p>נא הקש את אותה הסיסמא</p>
@@ -133,7 +135,7 @@
         
         
               <!-- Submit button -->
-              <button type="submit" class="btn btn-primary btn-block mb-3" [disabled]="!registerForm.valid || (registerPassword2.value != registerPassword.value)">Register</button>
+              <button type="submit" class="btn btn-primary btn-block mb-3" [disabled]="!registerForm.valid || (registerPassword2.value != registerPassword.value)">הרשמה</button>
             </form>
           </div>
           </ng-template>

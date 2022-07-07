@@ -1,0 +1,39 @@
+<div class="container">
+  <h3 class="mt-3 mb-3 text-center"><span class="badge badge-pill badge-primary">משתמשים רשומים</span></h3>
+    
+  <table class="table col-12 table-responsive-lg text-center">
+      <thead> 
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">שם</th>
+          <th scope="col">דוא"ל</th>
+          <th scope="col">טלפון</th>
+          <th scope="col">הרשאה</th>
+          <th class="primary" scope="col">שינוי הרשאה</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of data; let i=index">
+          <th>{{i}}</th>
+          <td >{{user.name}}</td>
+          <td>{{user.email}}</td>
+          <td><p><i class="fa fa-phone-square" aria-hidden="true"></i> {{user.phone}}</p></td>
+          <td class="text-secondary" *ngIf="user.userStatus==0">קריאה</td>
+          <td class="text-success" *ngIf="user.userStatus==1">כתיבה</td>
+          <td class="text-warning" *ngIf="user.userStatus==2">מנהל</td>
+          <td *ngIf="user.userStatus==0||user.userStatus==1"><button (click)="changeStatus(user._id,user.userStatus)">שנה</button></td>
+          <!-- <td *ngIf="user.userStatus==1"><button (click)="changeStatus(user._id,0)">שנה</button></td> -->
+
+          <!-- <td scope="row" type="button" class="btn btn-primary btn-circle infobtn" routerLink="../customerdetails/{{customer.id}}"><i class="fas fa-info-circle"></i></td> -->
+  
+          <!-- <td><i type="button" class="fas fa-edit" routerLink="../adduser/{{customer.id}}"    style="color:blue"></i></td>
+          <td> -->
+            <!-- <button type="button" class="btn btn-danger" *ngIf="customer.status" (click)="changeStatus(customer.id, false)">Remove</button>
+            <button type="button" class="btn btn-success" *ngIf="!customer.status" (click)="changeStatus(customer.id, true)" >Restore</button></td>
+           -->
+        </tr>
+        </tbody>
+    </table>
+    
+  </div>

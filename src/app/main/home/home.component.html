@@ -1,299 +1,108 @@
-<div class="col-8 mx-auto text-center ">
-  <div class="row ">
-    <div class="col-xl-3 col-lg-6">
-      <div class="card l-bg-cherry">
-        <div class="card-statistic-3 p-4">
-          <div class="card-icon card-icon-large"><i class="fas fa-shopping-cart"></i></div>
-          <div class="mb-4">
-            <h3 class="card-title mb-0">סיפורים קצרים</h3>
-          </div>
+<div class="container">
+  <div class="row">
+<div class="col-md-6 col-12 mx-auto text-center mt-4 ">
+<div class="row">
+  <form action="" class="w-100 px-4">
+    <div class="p-1 bg-light rounded rounded-pill border shadow-sm mb-4 w-100">
+      <div class="input-group">
+        <input type="search" id="searchInput" placeholder="מה אתה מחפש היום?" aria-describedby="button-addon1" class="form-control border-0 bg-light"  [(ngModel)]="placeId" [ngModelOptions]="{standalone: true}">
+        <div class="input-group-append">
+          <button id="button-addon1" type="button" (click)="searchPushed(placeId)"  (keyup.enter)="searchPushed(placeId)" class="btn btn-link text-primary"><i class="fa fa-search"></i></button>
         </div>
       </div>
     </div>
+  </form>
 
-    <div class="col-xl-3 col-lg-6">
-      <div class="card l-bg-green-dark">
-        <div class="card-statistic-3 p-4">
-          <div class="card-icon card-icon-large"><i class="fas fa-shopping-cart"></i></div>
-          <div class="mb-4">
-            <h3 class="card-title mb-0">סיפורים לגיל הרך</h3>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-xl-3 col-lg-6">
-      <div class="card l-bg-orange-dark">
-        <div class="card-statistic-3 p-4">
-          <div class="card-icon card-icon-large"><i class="fas fa-shopping-cart"></i></div>
-          <div class="mb-4">
-            <h3 class="card-title mb-0">סיפורים בהמשכים</h3>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-xl-3 col-lg-6">
-      <div class="card l-bg-cyan">
-        <div class="card-statistic-3 p-4">
-          <div class="card-icon card-icon-large"><i class="fas fa-shopping-cart"></i></div>
-          <div class="mb-4">
-            <h3 class="card-title mb-0">סיפורים קצרים</h3>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-xl-3 col-lg-6">
-      <div class="card l-bg-orange">
-        <div class="card-statistic-3 p-4">
-          <div class="card-icon card-icon-large"><i class="fas fa-shopping-cart"></i></div>
-          <div class="mb-4">
-            <h3 class="card-title mb-0">סיפורים קצרים</h3>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-xl-3 col-lg-6">
-      <div class="card l-bg-green">
-        <div class="card-statistic-3 p-4">
-          <div class="card-icon card-icon-large"><i class="fas fa-shopping-cart"></i></div>
-          <div class="mb-4">
-            <h3 class="card-title mb-0">סיפורים קצרים</h3>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-xl-3 col-lg-6">
-      <div class="card l-bg-blue-dark">
-        <div class="card-statistic-3 p-4">
-          <div class="card-icon card-icon-large"><i class="fas fa-shopping-cart"></i></div>
-          <div class="mb-4">
-            <h3 class="card-title mb-0">סיפורים קצרים</h3>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
 </div>
 
 
-
-
-
-
-
-
-<form action="#">
-  <div class="form-group">
-    <input type="search" name="search" id="search" placeholder="What are you looking for?">
-    <button type="submit" class="submit"><i class="icon-search-1"></i></button>
-  </div>
-</form>
-<!-- Hero Section-->
-<section class="featured-posts no-padding-top">
-  <div class="container">
-    <!-- Post-->
-    <div class="row d-flex align-items-stretch">
-      <div class="text col-lg-7">
-        <div class="text-inner d-flex align-items-center">
-          <div class="content">
-            <header class="post-header">
-              <div class="category"><a href="#">Business</a><a href="#">Technology</a></div><a href="post.html">
-                <h2 class="h4">Alberto Savoia Can Teach You About Interior</h2>
-              </a>
-            </header>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-              dolore magna aliqua. Ut enim ad minim veniam, quis nostrude consectetur adipisicing elit, sed do eiusmod
-              tempor incididunt.</p>
-            <footer class="post-footer d-flex align-items-center"><a href="#"
-                class="author d-flex align-items-center flex-wrap">
-                <div class="avatar"><img src="img/avatar-1.jpg" alt="..." class="img-fluid"></div>
-                <div class="title"><span>John Doe</span></div>
-              </a>
-              <div class="date"><i class="icon-clock"></i> 2 months ago</div>
-              <div class="comments"><i class="icon-comment"></i>12</div>
-            </footer>
-          </div>
-        </div>
-      </div>
-      <div class="image col-lg-5"><img src="img/featured-pic-1.jpeg" alt="..."></div>
-    </div>
-    <!-- Post        -->
-    <div class="row d-flex align-items-stretch">
-      <div class="image col-lg-5"><img src="img/featured-pic-2.jpeg" alt="..."></div>
-      <div class="text col-lg-7">
-        <div class="text-inner d-flex align-items-center">
-          <div class="content">
-            <header class="post-header">
-              <div class="category"><a href="#">Business</a><a href="#">Technology</a></div><a href="post.html">
-                <h2 class="h4">Alberto Savoia Can Teach You About Interior</h2>
-              </a>
-            </header>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-              dolore magna aliqua. Ut enim ad minim veniam, quis nostrude consectetur adipisicing elit, sed do eiusmod
-              tempor incididunt.</p>
-            <footer class="post-footer d-flex align-items-center"><a href="#"
-                class="author d-flex align-items-center flex-wrap">
-                <div class="avatar"><img src="img/avatar-2.jpg" alt="..." class="img-fluid"></div>
-                <div class="title"><span>John Doe</span></div>
-              </a>
-              <div class="date"><i class="icon-clock"></i> 2 months ago</div>
-              <div class="comments"><i class="icon-comment"></i>12</div>
-            </footer>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Post                            -->
-    <div class="row d-flex align-items-stretch">
-      <div class="text col-lg-7">
-        <div class="text-inner d-flex align-items-center">
-          <div class="content">
-            <header class="post-header">
-              <div class="category"><a href="#">Business</a><a href="#">Technology</a></div><a href="post.html">
-                <h2 class="h4">Alberto Savoia Can Teach You About Interior</h2>
-              </a>
-            </header>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-              dolore magna aliqua. Ut enim ad minim veniam, quis nostrude consectetur adipisicing elit, sed do eiusmod
-              tempor incididunt.</p>
-            <footer class="post-footer d-flex align-items-center"><a href="#"
-                class="author d-flex align-items-center flex-wrap">
-                <div class="avatar"><img src="img/avatar-3.jpg" alt="..." class="img-fluid"></div>
-                <div class="title"><span>John Doe</span></div>
-              </a>
-              <div class="date"><i class="icon-clock"></i> 2 months ago</div>
-              <div class="comments"><i class="icon-comment"></i>12</div>
-            </footer>
-          </div>
-        </div>
-      </div>
-      <div class="image col-lg-5"><img src="img/featured-pic-3.jpeg" alt="..."></div>
-    </div>
-  </div>
-</section>
-<!-- Divider Section-->
-<section style="background: url(img/divider-bg.jpg); background-size: cover; background-position: center bottom"
-  class="divider">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-7">
-        <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-          dolore magna aliqua</h2><a href="#" class="hero-link">View More</a>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- Latest Posts -->
-<section class="latest-posts">
-  <div class="container">
-    <header>
-      <h2>Latest from the blog</h2>
-      <p class="text-big">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-    </header>
-    <div class="row">
-      <div class="post col-md-4">
-        <div class="post-thumbnail"><a href="post.html"><img src="img/blog-1.jpg" alt="..." class="img-fluid"></a></div>
-        <div class="post-details">
-          <div class="post-meta d-flex justify-content-between">
-            <div class="date">20 May | 2016</div>
-            <div class="category"><a href="#">Business</a></div>
-          </div><a href="post.html">
-            <h3 class="h4">Ways to remember your important ideas</h3>
-          </a>
-          <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-            incididunt ut labore.</p>
-        </div>
-      </div>
-      <div class="post col-md-4">
-        <div class="post-thumbnail"><a href="post.html"><img src="img/blog-2.jpg" alt="..." class="img-fluid"></a></div>
-        <div class="post-details">
-          <div class="post-meta d-flex justify-content-between">
-            <div class="date">20 May | 2016</div>
-            <div class="category"><a href="#">Technology</a></div>
-          </div><a href="post.html">
-            <h3 class="h4">Diversity in Engineering: Effect on Questions</h3>
-          </a>
-          <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-            incididunt ut labore.</p>
-        </div>
-      </div>
-      <div class="post col-md-4">
-        <div class="post-thumbnail"><a href="post.html"><img src="img/blog-3.jpg" alt="..." class="img-fluid"></a></div>
-        <div class="post-details">
-          <div class="post-meta d-flex justify-content-between">
-            <div class="date">20 May | 2016</div>
-            <div class="category"><a href="#">Financial</a></div>
-          </div><a href="post.html">
-            <h3 class="h4">Alberto Savoia Can Teach You About Interior</h3>
-          </a>
-          <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-            incididunt ut labore.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- Newsletter Section-->
-<section class="newsletter no-padding-top">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6">
-        <h2>Subscribe to Newsletter</h2>
-        <p class="text-big">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua.</p>
-      </div>
-      <div class="col-md-8">
-        <div class="form-holder">
-          <form action="#">
-            <div class="form-group">
-              <input type="email" name="email" id="email" placeholder="Type your email address">
-              <button type="submit" class="submit">Subscribe</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- Gallery Section-->
-<section class="gallery no-padding">
   <div class="row">
-    <div class="mix col-lg-3 col-md-3 col-sm-6">
-      <div class="item"><a href="img/gallery-1.jpg" data-fancybox="gallery" class="image"><img src="img/gallery-1.jpg"
-            alt="..." class="img-fluid">
-          <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div>
-        </a></div>
+    <div class="col-lg-6">
+      <div [routerLink]="['/postlist']" [queryParams]="{tag:'סיפורים קצרים'}" class="card l-bg-cherry btn">
+        <div class="card-statistic-3  py-4 mx-auto">
+          <div class="card-icon card-icon-large"><i><img src="../../../assets/images/reshot-icon-story-book-3JMGFUE79P-bad37.svg"></i></div>
+          <div class="mb-4 text-center px-4">
+            <h1 class="card-title mb-0">סיפורים קצרים</h1>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="mix col-lg-3 col-md-3 col-sm-6">
-      <div class="item"><a href="img/gallery-2.jpg" data-fancybox="gallery" class="image"><img src="img/gallery-2.jpg"
-            alt="..." class="img-fluid">
-          <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div>
-        </a></div>
+  
+
+    <div class="col-lg-6">
+         
+      <div [routerLink]="['/postlist']" [queryParams]="{tag:'סיפורים לנשים'}" class="card l-bg-green-dark btn">
+        <div class="card-statistic-3  py-4 mx-auto">
+          <div class="card-icon card-icon-large"><i><img src="../../../assets/images/woman-avatar.svg"></i></div>
+          <div class="mb-4 text-center px-4">
+            <h1 class="card-title mb-0">סיפורים לנשים</h1>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="mix col-lg-3 col-md-3 col-sm-6">
-      <div class="item"><a href="img/gallery-3.jpg" data-fancybox="gallery" class="image"><img src="img/gallery-3.jpg"
-            alt="..." class="img-fluid">
-          <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div>
-        </a></div>
+
+    <div class="col-lg-6">
+      <div [routerLink]="['/postlist']" [queryParams]="{tag:'סיפורים בהמשכים'}" class="card l-bg-orange-dark btn">
+        <div class="card-statistic-3  py-4 mx-auto">
+          <div class="card-icon card-icon-large"><i><img src="../../../assets/images/books.svg"></i></div>
+          <div class="mb-4 text-center px-4">
+            <h1 class="card-title mb-0">סיפורים בהמשכים</h1>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="mix col-lg-3 col-md-3 col-sm-6">
-      <div class="item"><a href="img/gallery-4.jpg" data-fancybox="gallery" class="image"><img src="img/gallery-4.jpg"
-            alt="..." class="img-fluid">
-          <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div>
-        </a></div>
+
+    <div class="col-lg-6">
+      <div [routerLink]="['/postlist']" [queryParams]="{tag:'סיפורים חגים'}" class="card l-bg-cyan-dark btn">
+        <div class="card-statistic-3 py-4 mx-auto">
+          <div class="card-icon card-icon-large"><i><img src="../../../assets/images/hanukkah-46906.svg"></i></div>
+          <div class="mb-4 text-center px-4">
+            <h1 class="card-title mb-0">סיפורי חגים</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="col-12">
+        <div [routerLink]="['/postlist']" [queryParams]="{query:'*'}" class="card l-bg-yellow btn">
+          <div class="card-statistic-3  py-4 mx-auto">
+            <div class="card-icon card-icon-large"><i></i></div>
+            <div class="mb-4 text-center px-4">
+              <h1 class="card-title mb-0">כל הסיפורים</h1>
+            </div>
+          </div>
+      </div>
+  
+  </div>
+</div>
+  
+  </div>
+
+    <div class="col-md-6 col-12 mx-auto text-center mt-4 border rounded">
+      <h3><span class="badge badge-pill badge-primary">סיפורים אחרונים</span></h3>
+      <div *ngIf="!latest" class="mt-4">
+        <h4 class="mt-4">טוען סיפורים...</h4>
+
+      </div>
+
+    <div class="card btn"  [routerLink]="['/post/',post._id]"  *ngFor="let post of latest">
+      <img *ngIf="post.imageUrl" src="{{post.imageUrl}}" class="card-img-top" />
+      <div class="card-body">
+        <h5 class="card-title">{{post.name}}</h5>
+        <p class="card-text">
+          {{post.summary}}
+        </p>
+      </div>
     </div>
   </div>
 
-  <!-- JavaScript files-->
-  <!-- <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/popper.js/umd/popper.min.js"> </script>
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script src="vendor/jquery.cookie/jquery.cookie.js"> </script>
-    <script src="vendor/@fancyapps/fancybox/jquery.fancybox.min.js"></script>
-    <script src="js/front.js"></script>
-   -->
+
+
+
+
+
+
+
+
+
+
+    

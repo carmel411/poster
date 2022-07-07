@@ -7,3 +7,6 @@
         height: 50px;
         border-radius: 50%;
       }
+.small-text{
+  font-size: smaller;
+}

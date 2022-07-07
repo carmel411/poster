@@ -1,0 +1,6 @@
+{
+    "/api": {
+    "target": "https://rocky-cove-74325.herokuapp.com/",
+    "secure": false
+    }
+    }

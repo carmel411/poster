@@ -27,13 +27,11 @@ export class LoginComponent implements OnInit {
     }
 
 registerPushed(registerForm: NgForm){
-  console.log(registerForm.value)
   this.auth.register(registerForm.value.registerName,registerForm.value.registerEmail,registerForm.value.registerPassword);
 }
 
 
 loginPushed(loginForm: NgForm){
-console.log(loginForm.value)
 this.auth.login(loginForm.value.loginEmail,loginForm.value.loginPassword,loginForm.value.rememberMe);
 }
 

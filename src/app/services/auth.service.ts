@@ -9,7 +9,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { environment } from '../../environments/environment';
 import { HttpHeaders } from '@angular/common/http';
 import { User } from 'src/moduls/user';
-import { UsersComponent } from '../admin/users/users.component';
+import { UsersComponent } from '../users/users.component';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,6 @@ export class AuthService {
 
   userId:string ="";
   userToken:string = "";
-  ifUserLogin = new BehaviorSubject<boolean>(false);  
   currentUser = new BehaviorSubject<object>({});
   allUsersData = new BehaviorSubject<any>([]);
 
@@ -33,28 +32,20 @@ export class AuthService {
     const headers = { 'content-type': 'application/json'}  
     const userInfo = {'name': name, 'email': email, 'password': password, 'userStatus': 0};
     const body=JSON.stringify(userInfo);
-    console.log(userInfo);
-    console.log(body);
      
     this.http.post<any>(`${this.API_URL}users`,body,{'headers':headers}).subscribe({
         next: data => {
             this.spinner.setStatus(false);
             this.userId = data._id;
-            this.swal.alertWithSuccess("CONGRATULATIONS! you are registered!")
-            console.log(this.userId)
+            this.swal.alertWithSuccess("נרשמת בהצלחה")
             this.login(email,password,false);
 
         },
         error: error => {
           this.spinner.setStatus(false);
-          if (typeof error.error == 'string'){
-            this.swal.alertWithWarning("Register Error",error.error)
-          }else{
-            this.swal.alertWithWarning("Register Error",error.message)
+            this.swal.alertWithWarning("תקלה בהרשמה", error)
           } 
-          console.error('There was an error!', error.error );
-        }
-    })
+        })
   }
 
   login(email: string, password: string, rememberMe: boolean){
@@ -67,16 +58,11 @@ export class AuthService {
         next: data => {
             this.spinner.setStatus(false);
             this.userToken = data.token;
-            // console.log(data);
-            // this.userId = data.user_id;
             sessionStorage.setItem('access-token', this.userToken)
-            // sessionStorage.setItem('user_id', this.userId)
-
-            this.swal.alertWithSuccess("Login Success")
-            // console.log(this.userToken);
+            
+            this.swal.alertWithSuccess("ברוך הבא")
             if (rememberMe == true){localStorage.setItem('remember-email', email)}
             if (rememberMe == true){localStorage.setItem('remember-password', password)}
-            this.ifUserLogin.next(true);
             this.getUserData();
             
             
@@ -111,9 +97,7 @@ forgetPassword(emailAddress:string){
       next: data => {
         this.spinner.setStatus(false);
         this.swal.alertWithSuccess("סיסמתך אופסה ונשלחה לדואר האלקטרוני שהזנת")
-        // console.log(data);
-          // this.sendPassword(emailAddress);
-      },
+            },
       error: error => {
         this.spinner.setStatus(false);
         if (typeof error.error == 'string'){
@@ -128,25 +112,21 @@ forgetPassword(emailAddress:string){
 logout(){
   localStorage.clear()
   sessionStorage.clear()
-  this.ifUserLogin.next(false);
   this.currentUser.next({});
 
   this.router.navigate(['/home'])
 }
 
 getUserData(): void{
-  this.spinner.setStatus(true);
   let token: string = sessionStorage.getItem('access-token')!
   const headers = new HttpHeaders().set('x-auth-token',token)
   this.http.get<object>(`${this.API_URL}users/me`, {headers} ).subscribe({
     next: data => {
-        this.spinner.setStatus(false);
         this.currentUser.next(data);
-        console.log("נתקבל מידע משתמש")
-    },
+      },
     error: error => {
-      this.spinner.setStatus(false);
-      console.error('error get user data', error.error );
+      let errorString = JSON.stringify(error)
+      this.swal.alertWithWarning("תקלה בקבלת מידע המשתמש ", error );
     }
 })
 }
@@ -159,13 +139,11 @@ updateUserData(name:string, email:string, phone:string, password:string, passwor
   let token: string = sessionStorage.getItem('access-token')!
   const headers = new HttpHeaders().set('x-auth-token',token)
   const userInfo = {'name': name, 'email': email, 'phone':phone, 'password': password, 'password2': password2, 'avatar': avatar};
-  console.log(userInfo);
   this.http.patch<any>(`${this.API_URL}users/update`,userInfo,{headers}).subscribe({
       next: data => {
           this.spinner.setStatus(false);
           this.userId = data._id;
           this.swal.alertWithSuccess("הפרופיל עודכן")
-          console.log(this.userId)
           this.getUserData()
 
       },
@@ -186,11 +164,9 @@ updateUserStatus(id:string, newStatus:number){
   let token: string = sessionStorage.getItem('access-token')!
   const headers = new HttpHeaders().set('x-auth-token',token)
   const body = {'id': id, 'newStatus': newStatus};
-  console.log(body);
   this.http.patch<any>(`${this.API_URL}users/status`,body,{headers}).subscribe({
       next: data => {
           this.spinner.setStatus(false);
-          console.log("הסטטוס עודכן")
           this.getAllusers()
 
       },
@@ -206,6 +182,14 @@ updateUserStatus(id:string, newStatus:number){
   })
 }
 
+updateUserfavorites(posts:Array<string>): Promise<any>{
+  let token: string = sessionStorage.getItem('access-token')!
+  const headers = new HttpHeaders().set('x-auth-token',token)
+  const body = posts;
+  return this.http.patch<any>(`${this.API_URL}users/posts`,body,{headers}).toPromise()
+     
+  }
+
 
 
 getAllusers(): void{
@@ -216,22 +200,11 @@ getAllusers(): void{
   .subscribe({
     next: data => {
         this.spinner.setStatus(false);
-        console.log("נתקבלה רשימת משתמשים")
         this.allUsersData.next(data)
     },
     error: error => {
       this.spinner.setStatus(false);
-      console.error('error get user data', error.error );
-      this.swal.alertWithWarning("רשימת משתמשים אינה זמינה",error.error)
+      this.swal.alertWithWarning("רשימת משתמשים אינה זמינה","")
       }})}
-
-
-
-// ifUserLogin():boolean{
-//   if (sessionStorage.getItem('access-token')){
-//     return true
-//   }else{return false}
-// }
-
 
 }

@@ -1,1 +1,51 @@
-<p>postlist works!</p>
+<div class="container mx-auto">
+  <div class="mx-auto text-center">
+    <h1><span class="badge badge-pill badge-primary">{{title}}</span></h1>
+  </div>
+
+  <div class="mx-auto text-center">
+    <p><span class="badge badge-pill badge-primary d-inline">מיון:</span></p>
+<div class="btn-group" role="group" aria-label="Basic example">
+  <button type="button" (click)="setSortCondition(1)" class="btn btn-secondary rounded-right">א-ת</button>
+  <button type="button" (click)="setSortCondition(2)"  class="btn btn-secondary">ת-א</button>
+  <button type="button" (click)="setSortCondition(5)" class="btn btn-secondary">פופולריות</button>
+  <button type="button" (click)="setSortCondition(4)" class="btn btn-secondary">מחדש לישן</button>
+  <button type="button" (click)="setSortCondition(3)" class="btn btn-secondary rounded-left">מישן לחדש</button>
+</div>
+</div>
+
+
+  
+  <div class="row"> 
+    
+    <div class="profile-card-4 col-lg-4 col-md-6 col-12 text-center w-100"   *ngFor="let post of sortedData">
+      <div  class="m-2 iconsGroup" *ngIf="currentUserData">
+        <span *ngIf="!favorites.includes(post._id)"  (click)="setFavorite(post._id,true)" class="badge badge-pill badge-light"><img src="../../assets/images/star-line-yellow.svg" class="icon"></span>
+        <span *ngIf="favorites.includes(post._id)" (click)="setFavorite(post._id,false)" class="badge badge-pill badge-light"><img src="../../assets/images/star.svg" class="icon"></span>
+        <span *ngIf="currentUserData.userStatus==2||currentUserData._id==post.user_id"  [routerLink]="['/edit/',post._id]"  class="badge badge-pill badge-light"><img src="../../assets/images/pen.svg" class="icon"></span>
+        <span *ngIf="currentUserData.userStatus==2||currentUserData._id==post.user_id" (click)="deletePost(post._id)" class="badge badge-pill badge-light"><img src="../../assets/images/full-trash-bin.svg" class="icon"></span>
+    </div>
+    <div [routerLink]="['/post/',post._id]">
+        <img *ngIf="post.imageUrl" src="{{post.imageUrl}}" class="img img-responsive w-100 mx-0 px-0">
+        <img *ngIf="!post.imageUrl" src="https://media.istockphoto.com/photos/blue-background-picture-id996078816?k=20&m=996078816&s=612x612&w=0&h=RnDOSWqpE3SghSazzNztGF-w9pDg0PiQKuRRbLJcyEY=" class="img img-responsive w-100 mx-0 px-0">
+      <div class="profile-content">
+      <div class="profile-name">
+        <h2 class="font-weight-bold badge badge-pill badge-trans ">{{post.name}}</h2>
+        <br>
+          <h6 class=" badge badge-pill badge-trans mt-2">{{post.author}}</h6>
+        </div>
+        <div class="profile-description">{{post.summary}}</div>
+        
+        <div class="text-center mx-auto">
+            <p class="text-center">{{post.views}}</p>
+          </div>
+        </div>
+       
+    </div>
+  </div>
+
+
+
+
+</div>
+</div>

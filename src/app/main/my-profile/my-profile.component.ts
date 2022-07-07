@@ -17,12 +17,6 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class MyProfileComponent implements OnInit, OnDestroy{
 
-// currentUserData: {}={
-//       name: "", 
-//       phone: "", 
-//       email: "", 
-//       avatar: ""
-// }
 
   constructor(private router: Router ,private sanitizer:DomSanitizer,private spinner: SpinnerService, private imageCompress: NgxImageCompressService,private auth: AuthService,  private route: ActivatedRoute, private swal: SwalService,private _location: Location) { }
 
@@ -46,7 +40,6 @@ ngOnDestroy(): void {
   
     this.auth.currentUser.subscribe((val)=>{
       const currentUserData = (val)
-      console.log(currentUserData)
       const objCurrentUserData = JSON.parse(JSON.stringify(currentUserData))
       setTimeout(() => {
         this.updateUserForm?.form.patchValue({

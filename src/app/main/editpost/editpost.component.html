@@ -4,12 +4,7 @@
       <div class="col-md-12 mb-4">
         <div class="card mb-4">
           <div class="card-header py-3">
-
-
-
-
-
-            <h5 class="mb-0 text-center">{{title}}</h5>
+            <h5 class="mb-0 text-center"><span class="badge badge-pill badge-primary">{{title}}</span></h5>
           </div>
           <div class="card-body">
             <form #editPostForm=ngForm (ngSubmit)="onSubmit(editPostForm)">
@@ -56,13 +51,18 @@
                 <label class="form-label" for="tags">תגיות</label>
               </div>
               <div *ngIf="tags.invalid && (tags.dirty || tags.touched)" class="alert-danger">
-                <p>הכנס תגיות</p>
+                <p>(מופרדות על ידי פסיק) הכנס תגיות</p>
               </div>
     
               <div class="form-outline mb-4">
                 <textarea class="form-control" id="body" rows="20" name="postBody" required minlength="2" ngModel ></textarea>
                 <label class="form-label" for="postBody">הסיפור</label>
               </div>
+              <div *ngIf="id" class="form-outline mb-4">
+                <textarea class="form-control" id="comments" rows="20" name="comments"  minlength="2" ngModel ></textarea>
+                <label class="form-label" for="postBody">תגובות</label>
+              </div>
+    
               <!-- <button type="submit" class="mx-2 my-2 btn btn-success" [disabled]="!editPostForm.valid" >אישור</button> -->
               <button type="submit" class="mx-2 my-2 btn btn-success" [disabled]="!editPostForm.valid">אישור</button>
               <button type="button" class="mx-2 my-2 btn btn-primary" href="#" (click)="backClicked()" routerLinkActive="active">ביטול</button>

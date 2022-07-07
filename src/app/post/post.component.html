@@ -1,1 +1,76 @@
-<p>post works!</p>
+    <div class="container text-center">
+      <div class="row">
+        <main class="post blog-post col-lg-8 mx-auto">
+          <div class="container">
+            <div class="post-single">
+              <div class="post-details">
+                <h1><span class="badge badge-pill badge-primary">{{post.name}}</span></h1>
+                    <div class="text-center font-italic"><span>{{post.author}}</span></div>
+                  <div class="d-flex align-items-center flex-wrap">
+                  </div>
+                </div>
+                <div class="post-body">
+                    <div class="jumbotron">
+                  <p class="lead">{{post.summary}}</p></div>
+                  <p> <img  *ngIf="post.imageUrl" src="{{post.imageUrl}}" alt="post image" class="img-fluid"></p>
+                  <p class="text-justify spaces">{{post.postBody}}</p>
+                  <!-- <blockquote class="blockquote">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+                    <footer class="blockquote-footer">Someone famous in
+                      <cite title="Source Title">Source Title</cite>
+                    </footer>
+                  </blockquote> -->
+                </div>
+                <div class="post-tags ">
+                    <a [routerLink]="['/postlist']" [queryParams]="{tag:singleTag}" class="tag white-back" *ngFor="let singleTag of post.tags">{{singleTag}}</a>
+                 </div>
+                 <div class="post-comments white-back">
+                  <header>
+                    <h3 class="h6"> תגובות <span class="no-of-comments">({{post.comments.length}})</span></h3>
+                  </header>
+                  <div class="comment" *ngFor="let comment of post.comments; let i=index">
+                    <div class="comment-header d-flex justify-content-between">
+                      <div class="user d-flex align-items-center">
+                        <p class="title"><strong> [{{i}}] </strong></p>
+                        <p class="title font-italic">{{comment.name}}</p>
+                      </div>
+                    </div>
+                    <div class="comment-body text-justify ">
+                      <p>{{comment.body}}</p>
+                    </div>
+                  </div>
+                  
+                </div>
+                <div class="add-comment white-back">
+                  <header>
+                    <h3 class="h6">הוסף תגובה</h3>
+                  </header>
+                  <form class="commenting-form" #commentForm=ngForm (ngSubmit)="commentPushed(commentForm)">
+                    <div class="row">
+                      <div class="form-group col-md-6">
+                        <input type="text" name="name" id="name" placeholder="שם" class="form-control" minlength="3" ngModel required #name="ngModel">
+                        <div *ngIf="name.invalid && commentForm.touched" class="danger">
+                          <p>נא הקש שם</p>
+                          </div>
+                        
+                      </div>
+                      <div class="form-group col-md-6">
+                        <input type="email" name="email" id="email" placeholder="כתובת דוא''ל (לא תפורסם)" class="form-control" ngModel required #email="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" >
+                        <div *ngIf="email.invalid && commentForm.touched" class="danger">
+                          <p>נא הקש כתובת דוא"ל תקינה</p>
+                          </div>
+                      </div>
+                      
+                      <div class="form-group col-md-12">
+                        <textarea name="comment" id="comment" placeholder="התגובה שלך" class="form-control" minlength="3" ngModel required #comment="ngModel"></textarea>
+                      </div>
+                      <div *ngIf="comment.invalid && commentForm.touched" class="danger">
+                        <p>הקש את תגובתך</p>
+                        </div>
+                      <div class="form-group col-md-12">
+                        <button type="submit" class="btn btn-secondary">שלח תגובה</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+            </div>
