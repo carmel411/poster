@@ -19,7 +19,7 @@
     <div class="container">
       <!-- Navbar Brand -->
       <div class="navbar-header d-flex align-items-center justify-content-between">
-        <img src="../../../assets/images/logo.gif" class="logo">
+        <img src="../../../assets/images/logo.gif" routerLink="/home" type="button" class="logo">
         <!-- Navbar Brand --><a routerLink="/home" class="navbar-brand"></a>
         <!-- Toggle Button-->
         <button type="button" data-toggle="collapse" data-target="#navbarcollapse" aria-controls="navbarcollapse"
@@ -32,27 +32,36 @@
         <ul class="navbar-nav ml-auto">
           <li class="nav-item"><a routerLink="/home" routerLinkActive="active-link" class="nav-link ">בית</a>
           </li>
-          <li *ngIf="(userData|json)!='{}'" class="nav-item"><a routerLink="/myprofile" routerLinkActive="active-link" class="nav-link">הפרופיל שלי</a>
+          
+                    <li class="nav-item" ngbDropdown display="dynamic" placement="bottom-end">
+            <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdown3" role="button">
+              תגיות
+            </a>
+            <div ngbDropdownMenu aria-labelledby="navbarDropdown3" class="dropdown-menu">
+              <a *ngFor="let oneTag of tagsList" ngbDropdownItem (click)="goToTagPage(oneTag)">{{oneTag}}</a>
+            </div>
           </li>
           <li *ngIf="(userData|json)!='{}'" class="nav-item"><a  [routerLink]="['/postlist']" [queryParams]="{query:'favorites'}"  routerLinkActive="active-link" class="nav-link">המועדפים שלי</a>
           </li>
 
-          <li *ngIf="(userData.userStatus|json)=='2'"  class="nav-item"><a routerLink="/users" routerLinkActive="active-link" class="nav-link">ניהול משתמשים</a>
-          </li>
           <li class="nav-item"><a routerLink="/about" routerLinkActive="active-link" class="nav-link ">אודות</a>
           </li>
-          <li *ngIf="(userData.userStatus|json)=='2'||(userData.userStatus|json)=='1'" class="nav-item"><a routerLink="/edit" routerLinkActive="active-link" class="nav-link ">הוספת סיפור</a>
+          
+
+          <li *ngIf="(userData.userStatus|json)=='2'||(userData.userStatus|json)=='1'" class="nav-item border-right"><a routerLink="/edit" routerLinkActive="active-link" class="nav-link ">הוספת סיפור</a>
           </li>
-          <li *ngIf="(userData|json)=='{}'" class="nav-item"><a routerLink="/login" routerLinkActive="active-link"
-              class="nav-link">התחברות|הרשמה</a>
+          <li *ngIf="(userData.userStatus|json)=='2'"  class="nav-item"><a routerLink="/users" routerLinkActive="active-link" class="nav-link">ניהול משתמשים</a>
           </li>
-          <li *ngIf="(userData|json)!='{}'" class="nav-item"><a routerLink="" (click)="logoutClick()"
-               class="nav-link">התנתקות</a>
-          </li>
+
         </ul>
         <!-- User Info-->
-<div class="navbar-text d-flex align-center">
-  <img class="avatar" *ngIf="(userData|json)!='{}'" [src]="transformStringToImage()">
+<div>
+<ul class="navbar-nav">
+  <li *ngIf="(userData|json)=='{}'" class="nav-item"><a routerLink="/login" routerLinkActive="active-link"
+    class="nav-link">התחברות|הרשמה</a>
+</li>
+<li  *ngIf="(userData|json)!='{}'" class="nav-item d-inline-flex user-menu" ngbDropdown display="dynamic" placement="bottom-end" tabindex="0" ngbDropdownToggle id="navbarDropdownUser" role="button">
+  <img class="avatar" *ngIf="(userData|json)!='{}'" [src]="transformStringToImage()"  tabindex="0"  ngbDropdownToggle id="navbarDropdownUser" role="button">
 
   <div class="align-center">
           <p *ngIf="(userData|json)!='{}'" class="mb-0">שלום</p>
@@ -60,6 +69,18 @@
           <!-- TODO: לשנות שיהיה תלוי בקבלת מידע משתמש כי יש בעיה בכניסה ראשונה -->
         </div>
         <!-- <div class="navbar-text"><a href="#" class="search-btn"><i class="icon-search-1"></i></a></div> -->
+        <div ngbDropdownMenu aria-labelledby="navbarDropdownUser" class="dropdown-menu text-right">
+          <li *ngIf="(userData|json)!='{}'"  ngbDropdownItem  class="nav-item"><a routerLink="/myprofile" routerLinkActive="active-link" class="nav-link">הפרופיל שלי</a>
+          </li>
+          <li *ngIf="(userData|json)!='{}'"  ngbDropdownItem class="nav-item"><a routerLink="" (click)="logoutClick()"
+            class="nav-link">התנתקות</a>
+       </li>
+
+            </div>
+
+
+      </li>
+      </ul>
       </div>
     </div>
     </div>

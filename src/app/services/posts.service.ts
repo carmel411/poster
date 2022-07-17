@@ -34,6 +34,10 @@ export class PostsService {
 
   constructor(private http: HttpClient, private swal: SwalService, private spinner: SpinnerService, private router: Router) {}
 
+getTagsList(){
+  return this.http.get(`${this.API_URL}posts/tags`)
+  .toPromise();
+}
 
   getPostByPostId(postId: string): Promise < any > {
     let headers

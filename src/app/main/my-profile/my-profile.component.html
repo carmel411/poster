@@ -39,7 +39,7 @@
     <p class="text-center font-weight-bold mt-0">דוא"ל</p>
 
             <input type="email" class="form-control form-control-user"
-            id="updateUserEmail" name="updateUserEmail" aria-describedby="emailHelp"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" 
+            id="updateUserEmail" name="updateUserEmail" aria-describedby="emailHelp"  pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" 
             placeholder="לדוגמה abc@def.ghi" ngModel required email #updateUserEmail="ngModel">
                                                  
             <div *ngIf="updateUserEmail.invalid" class="danger">

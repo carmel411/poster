@@ -51,11 +51,16 @@ export class PostComponent implements OnInit {
   }
 
   getPost(id: string){
+    this.spinner.setStatus(true)
     this.postService.getPostByPostId(id).then((data) => {
       this.post = data;
+    this.spinner.setStatus(false)
+
       })
     .catch((error) => {
       let errorString = JSON.stringify(error)
+    this.spinner.setStatus(false)
+
       this.swal.alertWithWarning("תקלה בטעינת הסיפור","");
     });
 }

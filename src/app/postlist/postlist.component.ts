@@ -33,6 +33,8 @@ export class PostlistComponent implements OnInit {
 
   
 
+  
+
 
   ngOnInit(): void {
 if(sessionStorage.getItem("access-token")){
@@ -60,19 +62,22 @@ getData(){
       ...params.keys,
       ...params
     }
+  
+    if (this.allParams.params.tag) {
+      this.dataForTag(this.allParams.params.tag)
+    }
+    if (this.allParams.params.query == "*") {
+      this.allData()
+    }
+    if (this.allParams.params.query == "favorites") {
+      this.dataForFavorites();
+    }
+    if (this.allParams.params.query && this.allParams.params.query !="*" && this.allParams.params.query !="favorites") {
+      this.dataForQuery(this.allParams.params.query)
+    }
+    
+  
   });
-  if (this.allParams.params.tag) {
-    this.dataForTag(this.allParams.params.tag)
-  }
-  if (this.allParams.params.query == "*") {
-    this.allData()
-  }
-  if (this.allParams.params.query == "favorites") {
-    this.dataForFavorites();
-  }
-  if (this.allParams.params.query && this.allParams.params.query !="*" && this.allParams.params.query !="favorites") {
-    this.dataForQuery(this.allParams.params.query)
-  }
   
 }
 
