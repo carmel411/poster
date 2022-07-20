@@ -1,12 +1,10 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { SpinnerService } from 'src/app/services/spinner.service';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import {Location} from '@angular/common';
+import { Router, ActivatedRoute } from '@angular/router';
 import { PostsService } from 'src/app/services/posts.service';
-import Swal from 'sweetalert2';
 import { SwalService } from '../services/swal.service';
-import { FormsModule, NgForm } from '@angular/forms';
-
+import { NgForm } from '@angular/forms';
+import * as pdf from 'easypdf-io';
 
 @Component({
   selector: 'app-post',
@@ -73,5 +71,33 @@ this.postService.pushComment(this.id,newComment)
 window.location.reload()
 
 }
-     
+ 
+// downloadPDF() {
+//     var data = this.getSampleData();
+//     easypdf.create(data, function(result) {
+//         easypdf.download('sample.pdf', result.pdf);
+//         //	you can download like this as well:
+//         //	easypdf.download();
+//         //	easypdf.download('sample.pdf');
+//     });
+// }
+
+
+getSampleData() {
+  var html = '<p>Hello world!</p>';
+
+  return {
+      // Base64 encode html
+      html: btoa(html),
+      background: 'https://public.easyinvoice.cloud/img/watermark-draft.jpg',
+      settings: {
+          // "margin-top": 25, // Default to 25
+          // "margin-right": 25, // Default to 25
+          // "margin-left": 25, // Default to 25
+          // "margin-bottom": 25, // Default to 25
+          // "format": "Letter" // Defaults to A4
+      }
+  };
+}
+
 }
